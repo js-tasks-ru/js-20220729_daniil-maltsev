@@ -5,19 +5,17 @@
  * @returns {string[]}
  */
 export function sortStrings(arr, param = 'asc') {
-  let sortedArr = [...arr];
+  const sortedArr = [...arr];
   const collator = new Intl.Collator(['ru', 'en'], { caseFirst: "upper" });
-  function ascSort(a, b) {
-    return collator.compare(a, b);
-  }
+
+  const directions = {
+    "asc": 1,
+    "desc": -1
+  };
      
-  function descSort(a, b) {
-    return collator.compare(b, a);
+  function customSort(a, b) {
+    return directions[param] * collator.compare(a, b);
   }
 
-  if (param === 'desc') {
-    return sortedArr.sort(descSort);
-  } else {
-    return sortedArr.sort(ascSort);
-  }
+  return sortedArr.sort(customSort);
 }
