@@ -8,7 +8,6 @@ export default class ColumnChart {
     this.value = value;
     this.formatHeading = formatHeading;
     this.render();
-    this.initEventListeners();
   }
 
   formatChartItem(num, maxValue) {
@@ -26,29 +25,6 @@ export default class ColumnChart {
       const {value, perc} = this.formatChartItem(num, maxValue);
       return `<div style="--value: ${value}" data-tooltip="${perc}%"></div>`;
     }).join('');
-  //   return `
-  //   ${ this.data.length === 0 ? null : this.data.map(item => {
-  //   return `<div style="--value: ${item / 2}" data-tooltip="6%"></div>`;
-  // }).join('')}
-  // `;
-  }
-
-  getTemplate() {
-    console.log(this.data);
-    return `
-    <div class="column-chart ${ this.data.length === 0 ? 'column-chart_loading' : null}" style="--chart-height: ${this.chartHeight}">
-    <div class="column-chart__title">
-      Total ${this.label}
-      <a href=${this.link !== undefined ? this.link : null} class="column-chart__link">View all</a>
-    </div>
-    <div class="column-chart__container">
-      <div data-element="header" class="column-chart__header">${this.formatHeading ? this.formatHeading(this.value) : this.value}</div>
-      <div data-element="body" class="column-chart__chart">
-         ${this.getCharts()}
-      </div>
-    </div>
-  </div>
-    `;
   }
 
   render() {
@@ -69,12 +45,9 @@ export default class ColumnChart {
     </div>
   </div>
     `;
+
     this.element = div;
     document.body.append(div);
-  }
-
-  initEventListeners() {
-    // NOTE: в данном методе добавляем обработчики событий, если они есть
   }
 
   update(data) {
@@ -89,6 +62,5 @@ export default class ColumnChart {
 
   destroy() {
     this.remove();
-    // NOTE: удаляем обработчики событий, если они есть
   }
 }
