@@ -1,11 +1,12 @@
 export default class SortableTable {
   element;
-  subElements;
+  subElements = {};
 
   constructor(headerConfig = [], data = []) {
     this.data = data;
     this.headerConfig = headerConfig;
     this.render();
+
   }
 
   sort(field, param = 'asc') {
