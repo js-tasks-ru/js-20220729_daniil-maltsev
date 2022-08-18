@@ -2,6 +2,8 @@ export default class NotificationMessage {
   element;
   timer;
 
+  static activeNotification;
+
   constructor(msg, {duration = 2000, type = "success"} = {}) {
     this.msg = msg;
     this.duration = duration;
@@ -30,8 +32,14 @@ export default class NotificationMessage {
   }
 
   show(parent = document.body) {
+    if (NotificationMessage.activeNotification) {
+      NotificationMessage.activeNotification.remove();
+    }
+
     parent.append(this.element);
     this.timer = setTimeout(() => this.remove(), this.duration);
+
+    NotificationMessage.activeNotification = this;
   }
 
   remove() {
@@ -43,5 +51,6 @@ export default class NotificationMessage {
   destroy() {
     this.remove();
     this.element = null;
+    NotificationMessage.activeNotification = null;
   }
 }
