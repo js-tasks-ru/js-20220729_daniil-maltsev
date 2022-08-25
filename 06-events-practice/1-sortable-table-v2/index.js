@@ -14,12 +14,12 @@ export default class SortableTable {
     this.data = data;
     this.sorted = sorted;
     this.isSortLocally = isSortLocally;
-    this.initEventListeners();
     this.render();
+    this.initEventListeners();
   }
 
   getTableHeader() {
-    console.log(this.headersConfig);
+    // console.log(this.headersConfig);
     return `<div data-element="header" class="sortable-table__header sortable-table__row">
   ${this.headersConfig.map(item => {
     return this.getHeaderCell(item);
@@ -38,8 +38,8 @@ export default class SortableTable {
   }
 
   getTableBody(data) {
-    console.log(this.data);
-    return ` <div data-element="body" class="sortable-table__body">
+    // console.log(this.data);
+    return `<div data-element="body" class="sortable-table__body">
     ${this.getTableRows(data)}
     </div>`;
   }
@@ -148,11 +148,11 @@ export default class SortableTable {
     };
 
     if (column) {
-      console.log('before', this.subElements.body);
+      // console.log('before', this.subElements.body);
       const {id, order} = column.dataset;
       const newOrder = toggleOrder(order);
-      const sortedData = this.sortData(id, order);
-      console.log('sorted', sortedData, id, order);
+      const sortedData = this.sortData(id, newOrder);
+      // console.log('sorted', sortedData, id, order);
       const arrow = column.querySelector('.sortable-table__sort-arrow');
 
        column.dataset.order = newOrder;
@@ -165,7 +165,7 @@ export default class SortableTable {
 
       this.subElements.body.innerHTML = this.getTableRows(sortedData);
 
-      console.log('onClick sub', this.subElements.body);
+      // console.log('onClick sub', this.subElements.body);
     }
 
     // const sortType = event.target.closest('div').dataset.sortable;
@@ -194,7 +194,7 @@ export default class SortableTable {
     const allColumns = this.element.querySelectorAll('.sortable-table__cell[data-id]');
     const currentColumn = this.element.querySelector(`.sortable-table__cell[data-id="${field}"]`);
 
-    console.log('a', allColumns)
+    // console.log('a', allColumns)
 
     allColumns.forEach(column => {
       column.dataset.order = '';
@@ -203,7 +203,7 @@ export default class SortableTable {
     currentColumn.dataset.order = order;
 
     this.subElements.body.innerHTML = this.getTableRows(sortedData);
-    console.log('sorting');
+    // console.log('sorting');
   }
 
   render() {
@@ -216,8 +216,6 @@ export default class SortableTable {
 
     this.element = wrapper.firstElementChild;
     this.subElements = this.getSubElements(this.element);
-
-    this.initEventListeners();
   }
 
   remove () {
