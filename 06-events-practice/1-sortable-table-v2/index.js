@@ -107,22 +107,8 @@ export default class SortableTable {
     });
   }
 
-  // sort(field, order) {
-  //   const sortedData = this.sortData(field, order);
-  //   const allColumns = this.element.querySelectorAll('.sortable-table__cell[data-id]');
-  //   const currentColumn = this.element.querySelector(`.sortable-table__cell[data-id="${field}"]`);
-
-  //   allColumns.forEach(column => {
-  //     column.dataset.order = '';
-  //   });
-
-  //   currentColumn.dataset.order = order;
-
-  //   this.subElements.body.innerHTML = this.getTableRows(sortedData);
-  // }data-order="asc"
-
   initEventListeners() {
-    document.addEventListener('pointerdown', this.sortOnClick);
+    this.subElements.header.addEventListener('pointerdown', this.sortOnClick);
   }
 
   getHeaderSortingArrow (id) {
@@ -155,7 +141,7 @@ export default class SortableTable {
       // console.log('sorted', sortedData, id, order);
       const arrow = column.querySelector('.sortable-table__sort-arrow');
 
-       column.dataset.order = newOrder;
+      column.dataset.order = newOrder;
 
       if (!arrow) {
         column.append(this.subElements.arrow);
