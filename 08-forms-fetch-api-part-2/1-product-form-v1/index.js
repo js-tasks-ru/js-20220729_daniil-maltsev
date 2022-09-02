@@ -21,7 +21,6 @@ export default class ProductForm {
 
   onSubmit = event => {
     event.preventDefault();
-    console.log('wow')
     this.save();
   }
 
@@ -55,7 +54,7 @@ export default class ProductForm {
   getListCategories(categories) {
     return categories.map(item => {
       return item.subcategories.map(subitem => {
-        return `<option value="${subitem.id}">${item.title} > ${subitem.title}</option>`
+        return `<option value="${subitem.id}">${item.title} > ${subitem.title}</option>`;
       });
     });
   }
@@ -88,7 +87,7 @@ export default class ProductForm {
   }
 
   getFormData() {
-    const { productForm, imageListContainer  } = this.subElements;
+    const { productForm, imageListContainer } = this.subElements;
     const execludedFields = ['images'];
     const formatToNumber = ['price', 'quantity', 'discount', 'status'];
     const fields = Object.keys(this.defaultFormData).filter(item => !execludedFields.includes(item));
@@ -143,7 +142,7 @@ export default class ProductForm {
   </span>
       <button type="button">
         <img src="icon-trash.svg" data-delete-handle="" alt="delete">
-      </button></li>`
+      </button></li>`;
     }).join('')}`;
   }
 

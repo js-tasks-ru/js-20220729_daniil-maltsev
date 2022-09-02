@@ -48,7 +48,6 @@ export default class ColumnChart {
 
       const maxItem = Math.max(...Object.values(data));
       const scale = this.chartHeight / maxItem;
-      console.log('Max: ', maxItem);
 
       return Object.values(data).map(item => {
         return `<div style="--value: ${Math.floor(item * scale)}" data-tooltip="6%"></div>`
@@ -64,7 +63,6 @@ export default class ColumnChart {
       const data = await this.loadData(from, to);
 
       if (data && Object.values(data).length) {
-        console.log('data if', data);
         this.subElements.header.textContent = this.getHeaderTable(data);
         this.subElements.body.innerHTML = this.getTableBody(data);
       }
@@ -110,9 +108,6 @@ export default class ColumnChart {
 
       this.element = wrapper.firstElementChild;
       this.subElements = this.getSubElements(wrapper);
-
-      console.log('test', this.element.querySelector('.column-chart__link'));
-      console.log(this.subElements);
 
       document.body.append(this.element);
     }
